@@ -5,10 +5,8 @@ In this way quiz passwords are hidden to students.
 
 ## Install
 
-1. Copy the plugin directory "autoenrol" into moodle\enrol\. 
+1. Copy the plugin directory "qrcode" into moodle/mod/quiz/accessrule. 
 2. Check admin notifications to install.
-3. Visit the "Site Administration > Plugins > Enrolments" page.
-4. Click the eye symbol next to "Auto Enrol" to enable the plugin. 
 
 ## Maintainer
 
