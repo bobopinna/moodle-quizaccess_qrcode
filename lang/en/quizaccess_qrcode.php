@@ -27,4 +27,4 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'QRcode quiz access rule';
 $string['privacy:metadata'] = 'The QRcode quiz access rule plugin does not store any personal data.';
-$string['quizqrcode'] = 'Enter quiz password with QRCode';
+$string['qrcodescan'] = 'Enter quiz password with QRCode';

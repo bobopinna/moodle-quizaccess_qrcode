@@ -50,11 +50,10 @@ class quizaccess_qrcode extends quiz_access_rule_base {
         return empty($SESSION->passwordcheckedquizzes[$this->quiz->id]);
     }
 
-    public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform,
-            MoodleQuickForm $mform, $attemptid) {
+    public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform, MoodleQuickForm $mform, $attemptid) {
         $qrcodescanner = '<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>';
         $qrcodescanner .= '<div id="reader"><button class="btn btn-secondary" onclick="html5Qrcode.render(onScanSuccess);">';
-        $qrcodescanner .= get_string('quizqrcode', 'quizaccess_qrcode') . '</button></div>';
+        $qrcodescanner .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button></div>';
         $qrcodescanner .= '<script>
   function onScanSuccess(decodedText, decodedResult) { 
     $("#id_quizpassword").val(decodedText); 
