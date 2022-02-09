@@ -28,5 +28,5 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $plugin->version   = 2021100300;
-$plugin->requires  = 2021051100;
+$plugin->requires  = 2020061500;
 $plugin->component = 'quizaccess_qrcode';
