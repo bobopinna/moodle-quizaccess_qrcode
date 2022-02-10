@@ -52,7 +52,7 @@ class quizaccess_qrcode extends quiz_access_rule_base {
 
     public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform, MoodleQuickForm $mform, $attemptid) {
         $qrcodescanner = '<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>';
-        $qrcodescanner .= '<style>#reader{display:flex;flex-direction:column-reverse;} #reader__dashboard_section_swaplink{display:none !important;}</style>';
+        //$qrcodescanner .= '<style>#reader{display:flex;flex-direction:column-reverse;} #reader__dashboard_section_swaplink{display:none !important;}</style>';
         $qrcodescanner .= '<div id="reader"><button class="btn btn-secondary" onclick="html5Qrcode.render(onScanSuccess);">';
         $qrcodescanner .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button></div>';
         $qrcodescanner .= '<script>
