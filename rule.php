@@ -51,19 +51,38 @@ class quizaccess_qrcode extends quiz_access_rule_base {
     }
 
     public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform, MoodleQuickForm $mform, $attemptid) {
+        $qrcodestartbutton = '<button class="btn btn-secondary qrcodebutton" onclick="startReader();">';
+        $qrcodestartbutton .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button>';
+        $qrcodestopbutton = '<button class="btn btn-secondary qrcodebutton" onclick="stopReader();">';
+        $qrcodestopbutton .= get_string('qrcodestop', 'quizaccess_qrcode') . '</button>';
+
         $qrcodescanner = '<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>';
-        //$qrcodescanner .= '<style>#reader{display:flex;flex-direction:column-reverse;} #reader__dashboard_section_swaplink{display:none !important;}</style>';
-        $qrcodescanner .= '<div id="reader"><button class="btn btn-secondary" onclick="html5Qrcode.render(onScanSuccess);">';
-        $qrcodescanner .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button></div>';
+        $qrcodescanner .= '<div id="qrcodebutton">' . $qrcodestartbutton . '</div>';
+        $qrcodescanner .= '<div id="qrcodereader"></div>';
         $qrcodescanner .= '<script>
+   
+  const startButton = \'' . $qrcodestartbutton . '\';
+  const stopButton = \'' . $qrcodestopbutton . '\';
+  const formatsToSupport = [ Html5QrcodeSupportedFormats.QR_CODE ];
+  const config = { fps: 10, qrbox: {width: 250, height: 250} };
+  const html5Qrcode = new Html5Qrcode( "qrcodereader", {formatsToSupport: formatsToSupport });
+
   function onScanSuccess(decodedText, decodedResult) { 
-    $("#id_quizpassword").val(decodedText); 
-    $("#reader__dashboard_section_csr button:last-child").click();
+    $("#id_quizpassword").val(decodedText);
+    stopReader();
   }
 
-  const formatsToSupport = [ Html5QrcodeSupportedFormats.QR_CODE ];
-  const html5Qrcode = new Html5QrcodeScanner( "reader",
-    { fps: 10, qrbox: {width: 250, height: 250}, formatsToSupport: formatsToSupport }, false);
+  function stopReader() {
+    html5Qrcode.stop();
+    $(".fitem, .ftoggler").show();
+    $("#qrcodebutton").html(startButton);
+  }
+
+  function startReader() {
+    $(".fitem, .ftoggler").hide();
+    $("#qrcodebutton").html(stopButton);
+    html5Qrcode.start({ facingMode: "environment"}, config, onScanSuccess);
+  }
 
 </script>';
         
