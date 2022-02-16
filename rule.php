@@ -56,9 +56,11 @@ class quizaccess_qrcode extends quiz_access_rule_base {
         $qrcodestopbutton = '<button class="btn btn-secondary qrcodebutton" onclick="stopReader();">';
         $qrcodestopbutton .= get_string('qrcodestop', 'quizaccess_qrcode') . '</button>';
 
-        $qrcodescanner = '<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>';
+        $qrcodescanner = '<div id="qrcodeaccessrule">';
         $qrcodescanner .= '<div id="qrcodebutton">' . $qrcodestartbutton . '</div>';
         $qrcodescanner .= '<div id="qrcodereader"></div>';
+        $qrcodescanner .= '</div>';
+        $qrcodescanner .= '<script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>';
         $qrcodescanner .= '<script>
    
   const startButton = \'' . $qrcodestartbutton . '\';
@@ -68,19 +70,19 @@ class quizaccess_qrcode extends quiz_access_rule_base {
   const html5Qrcode = new Html5Qrcode( "qrcodereader", {formatsToSupport: formatsToSupport });
 
   function onScanSuccess(decodedText, decodedResult) { 
-    $("#id_quizpassword").val(decodedText);
+    document.getElementById("id_quizpassword").value = decodedText;
     stopReader();
   }
 
   function stopReader() {
     html5Qrcode.stop();
-    $(".fitem, .ftoggler").show();
-    $("#qrcodebutton").html(startButton);
+    document.getElementById("qrcodeaccessrule").classList.remove("qrcodefull");
+    document.getElementById("qrcodebutton").innerHTML = startButton;
   }
 
   function startReader() {
-    $(".fitem, .ftoggler").hide();
-    $("#qrcodebutton").html(stopButton);
+    document.getElementById("qrcodeaccessrule").classList.add("qrcodefull");
+    document.getElementById("qrcodebutton").innerHTML = stopButton;
     html5Qrcode.start({ facingMode: "environment"}, config, onScanSuccess);
   }
 
