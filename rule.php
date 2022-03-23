@@ -51,9 +51,9 @@ class quizaccess_qrcode extends quiz_access_rule_base {
     }
 
     public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform, MoodleQuickForm $mform, $attemptid) {
-        $qrcodestartbutton = '<button class="btn btn-secondary qrcodebutton" onclick="startReader();">';
+        $qrcodestartbutton = '<button type="button" class="btn btn-secondary qrcodebutton" onclick="startReader();">';
         $qrcodestartbutton .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button>';
-        $qrcodestopbutton = '<button class="btn btn-secondary qrcodebutton" onclick="stopReader();">';
+        $qrcodestopbutton = '<button type="button" class="btn btn-secondary qrcodebutton" onclick="stopReader();">';
         $qrcodestopbutton .= get_string('qrcodestop', 'quizaccess_qrcode') . '</button>';
 
         $qrcodescanner = '<div id="qrcodeaccessrule">';
