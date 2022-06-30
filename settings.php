@@ -15,19 +15,30 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for the quizaccess_qrcode plugin.
+ * Rule that permits to enter quiz password using a qrcode.
  *
- * @package    quizaccess
- * @subpackage qrcode
- * @copyright  2021 Roberto Pinna
+ * @package    quizaccess_qrcode
+ * @copyright  2022 Roberto Pinna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$string['pluginname'] = 'QRcode quiz access rule';
-$string['privacy:metadata'] = 'The QRcode quiz access rule plugin does not store any personal data.';
-$string['qrcodescan'] = 'Enter quiz password with QRCode';
-$string['qrcodestop'] = 'Close QRCode Scanner';
-$string['useqrcode'] = 'Use QRCode to enter quiz password';
-$string['useqrcode_help'] = 'If enabled, users can enter quiz password using a QRCode scanner.';
+if ($ADMIN->fulltree) {
+    $settings->add(
+        new admin_setting_heading(
+            'quizaccess_qrcode/heading',
+            get_string('generalsettings', 'admin'),
+            get_string('configintro', 'quiz')
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configcheckbox_with_advanced(
+            'quizaccess_qrcode/defaultenabled',
+            get_string('useqrcode', 'quizaccess_qrcode'),
+            '',
+            array('value' => 0, 'adv' => true)
+        )
+    );
+}
