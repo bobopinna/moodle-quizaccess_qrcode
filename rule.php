@@ -23,11 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 defined('MOODLE_INTERNAL') || die();
-
-require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
-
 
 /**
  * A rule implementing the qrcode check.
@@ -35,9 +31,9 @@ require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
  * @copyright  2021 Roberto Pinna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class quizaccess_qrcode extends quiz_access_rule_base {
+class quizaccess_qrcode extends mod_quiz\local\access_rule_base {
 
-    public static function make(quiz $quizobj, $timenow, $canignoretimelimits) {
+    public static function make(mod_quiz\quiz_settings $quizobj, $timenow, $canignoretimelimits) {
         if (empty($quizobj->get_quiz()->password) || empty($quizobj->get_quiz()->qrcodeenabled)) {
             return null;
         }
@@ -50,7 +46,8 @@ class quizaccess_qrcode extends quiz_access_rule_base {
         return empty($SESSION->passwordcheckedquizzes[$this->quiz->id]);
     }
 
-    public function add_preflight_check_form_fields(mod_quiz_preflight_check_form $quizform, MoodleQuickForm $mform, $attemptid) {
+    public function add_preflight_check_form_fields(mod_quiz\form\preflight_check_form $quizform, 
+                                                    MoodleQuickForm $mform, $attemptid) {
         $qrcodestartbutton = '<button type="button" class="btn btn-secondary qrcodebutton" onclick="startReader();">';
         $qrcodestartbutton .= get_string('qrcodescan', 'quizaccess_qrcode') . '</button>';
         $qrcodestopbutton = '<button type="button" class="btn btn-secondary qrcodebutton" onclick="stopReader();">';
