@@ -30,4 +30,4 @@ $string['privacy:metadata'] = 'La regola di accesso al quiz QRcode non salva nes
 $string['qrcodescan'] = 'Inserisci la password del quiz tramite QRcode';
 $string['qrcodestop'] = 'Chiudi lo scanner per QRcode';
 $string['useqrcode'] = 'Utilizza un QRcode per inserire la password del quiz';
-$string['useqrcode_help'] = 'Se abilitato, gli utenti potranno inserire la password del quiz utilizzando lo scanner per QRcode.'
+$string['useqrcode_help'] = 'Se abilitato, gli utenti potranno inserire la password del quiz utilizzando lo scanner per QRcode.';
